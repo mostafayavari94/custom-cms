@@ -1,0 +1,37 @@
+﻿<style > .background {
+    background-color: rgb(238,239,241);
+}
+
+.psliderback {
+    background-color: white;
+}
+
+#container {
+    margin-top: 0;
+    padding-top: 20px;
+}
+
+.coustombtn {
+    width: 90px;
+    height: 40px;
+    border: 1px solid rgb(12, 215, 196);
+    color: rgb(12, 215, 196);
+    padding: 5px;
+}
+
+    .coustombtn:hover {
+        color: white;
+        background-color: rgb(12, 215, 196);
+        border: 1px solid rgb(12, 215, 196);
+    }
+
+.back3 {
+    background-color: rgb(12, 215, 196);
+}
+
+.side {
+    margin-top: 59px;
+    background-color: white;
+}
+
+</style >
