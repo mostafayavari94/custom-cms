@@ -8,6 +8,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+
+    public function post(){
+        return $this->hasMany('App/Post','user_id');
+    }
+
     use Notifiable;
 
     /**

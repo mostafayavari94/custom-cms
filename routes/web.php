@@ -9,7 +9,7 @@ Route::prefix('admin')->group(function () {
 
 //routing for public area
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Auth::routes();
