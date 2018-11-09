@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
+use App\Comment;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -26,4 +26,12 @@ class DashboardController extends Controller
     {
         return view('admin.dashboard');
     }
+
+    public function noti()
+    {
+        $temp=Comment::where('status',0)->count();
+        return response()->json($temp);
+    }
+
+    
 }

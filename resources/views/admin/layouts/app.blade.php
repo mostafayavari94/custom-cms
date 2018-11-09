@@ -57,7 +57,18 @@
 
 
                         <ul  class="nav navbar-nav navbar-right pull-right">
-                            
+                            <li class="dropdown top-menu-item-xs">
+                                <a href="#" id="totalnoti" data-target="#" class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="true">
+                                    <i class="icon-bell"></i> 
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-lg">
+                                    <li class="notifi-title"> اطلاعیه ها</li>
+                                    <li class="list-group slimscroll-noti notification-list " id="notiItem">
+                                       
+                                    </li>
+                                   
+                                </ul>
+                            </li>
                             
                             <li class="dropdown top-menu-item-xs">
                                 <a href="" class="dropdown-toggle profile waves-effect waves-light" data-toggle="dropdown" aria-expanded="true"><img src="/image/user.png" alt="user-img" class="img-circle"> </a>
@@ -100,33 +111,12 @@
                         </li>
 
                         <li class="has_sub">
-                            <a href="/personal/worktime" id="ordernoti" class="waves-effect"><i class="md md-share"></i>Worktime List
+                            <a href="/admin/categories" id="ordernoti" class="waves-effect"><i class="md md-share"></i>دسته بندی ها
                             </a>
                         </li>
 
                         <li class="has_sub">
-                            <a href="/personal/setting" class="waves-effect"><i class="md md-open-in-browser"></i>تنظیمات</a>
-                        </li>
-
-                        <li class="has_sub">
-                            <a href="/personal/courses" class="waves-effect"><i class="md md-message"></i>courses</a>
-                        </li>
-
-                        <li class="has_sub">
-                            <a href="/HeadSupporter/Users/Authentication" id="usernoti" class="waves-effect"><i class="md md-accessibility"></i>احراز هویت فروشندگان
-                            
-                            </a>
-                        </li>
-
-                        <li class="has_sub">
-                            <a href="/HeadSupporter/UserInfo/edit" class="waves-effect"><i class="fa fa-files-o fa-fw"></i>اطلاعات شخصی</a>
-                        </li>
-
-                        <li class="has_sub">
-                            <a href="/HeadSupporter/Messages/ShowReqMessages" id="usernoti" class="waves-effect">
-                                <i class="md md-accessibility"></i>توزیع پیام ها
-
-                            </a>
+                            <a id="comment_noti" href="/admin/comments" class="waves-effect"><i class="md md-open-in-browser"></i>نظرات</a>
                         </li>
                     </ul>
                     <div class="clearfix"></div>
@@ -187,7 +177,31 @@
 
     <script src="/content/assets/js/jquery.core.js"></script>
     <script src="/content/assets/js/jquery.app.js"></script>
+    <script type="text/javascript">
+        $(function notifications() {
+           var url="{{ url('/admin/noti') }}";
+        
+            $.ajax({
+                url: url,
+                method: 'GET',
+                success: function(result){
+                    if (result != 0) {
 
+                    
+                    document.getElementById('comment_noti').innerHTML += '<span id="number" class="label label-pink pull-right">' + result + '</span>';
+                    document.getElementById('notiItem').innerHTML += '<a href="/admin/comments" class="list-group-item"><div class="media"><div class="pull-left p-r-10"><em class="fa fa-user-plus noti-pink"></em></div><div class="media-body"><h5 class="media-heading">' + '<span id="ordernotinumber" class="label label-pink pull-right">' + result + '</span> احراز هویت فروشندگان</h5><p class="m-0"><small>فروشنده ها منتظرن !!!</small></p></div></div></a>';
+                    }
+                    if (result > 0) {
+                        document.getElementById('totalnoti').innerHTML +='<span  class=" badge badge-xs badge-danger">'+result+'</span>' ;
+                    }
+                },
+                error: function(result){
+                 alert('متاسفانه مشکلی در سیستم رخ داده است.');  
+                }
+            });
+               
+        })
+    </script>
     @yield('javascript')
 </body>
 </html>

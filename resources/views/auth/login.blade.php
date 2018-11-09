@@ -2,6 +2,19 @@
 
 @section('content')
 <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                @if (count($errors) > 0)
+      <div class="alert alert-danger">
+        <ul>
+          @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+          @endforeach
+        </ul>
+      </div>
+      @endif
+            </div>
+        </div>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -38,6 +51,40 @@
                                 @endif
                             </div>
                         </div>
+
+                        <!--  -->
+
+
+                        <div class="form-group row">
+                            <label for="password" class="col-md-4 col-form-label text-md-right"></label>
+
+                            <div class="col-md-6">
+                                <div class="captcha">
+                                <span>{!! captcha_img() !!}</span>
+                                <button onclick="refresh()" type="button" class="btn btn-success"><i class="fa fa-refresh"  id="refresh"></i></button>
+                                </div>
+
+                              
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label for="password" class="col-md-4 col-form-label text-md-right">Captcha</label>
+
+                            <div class="col-md-6">
+                                <input id="captcha" type="text" class="form-control" placeholder="Enter Captcha" name="captcha" required>
+                            </div>
+                            @if ($errors->has('captcha'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('captcha') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                        
+
+
+                        <!--  -->
 
                         <div class="form-group row">
                             <div class="col-md-6 offset-md-4">

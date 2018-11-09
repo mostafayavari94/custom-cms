@@ -77,4 +77,22 @@
         </main>
     </div>
 </body>
+<script src="/content/assets/js/jquery.min.js"></script>
+<script type="text/javascript">
+
+function refresh(){
+    var url="{{ url('refreshcaptcha') }}";
+        
+    $.ajax({
+    url: url,
+    method: 'GET',
+     success:function(data){
+        $(".captcha span").html(data.captcha);
+     },
+     error:function(data){
+        console.log(data)
+     }
+    });
+}
+</script>
 </html>

@@ -16,7 +16,11 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')
+            ->references('id')->on('users')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
             $table->string('title');
             $table->string('text');
             $table->string('abstract');
@@ -26,9 +30,14 @@ class CreatePostsTable extends Migration
             
         });
 
+
          Schema::create('comments', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('post_id');
+            $table->unsignedInteger('post_id');
+            $table->foreign('post_id')
+            ->references('id')->on('posts')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
             $table->string('name');
             $table->string('text');
             $table->string('email');
@@ -41,21 +50,22 @@ class CreatePostsTable extends Migration
 
         Schema::create('post_images', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('post_id');
+            $table->unsignedInteger('post_id')->references('id')->on('posts')->onDelete('cascade');
             $table->string('link');            
         });
 
         Schema::create('post_category', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('post_id');
-            $table->string('category_id');
-            
+            $table->unsignedInteger('post_id')->references('id')->on('posts')->onDelete('cascade');       
+            $table->unsignedInteger('category_id')->references('id')->on('categories')->onDelete('cascade');                
         });
 
         Schema::create('categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('name');
+            $table->string('name');
             $table->string('description');
+            $table->integer('status');
+            $table->string('image');
         });
     }
 
